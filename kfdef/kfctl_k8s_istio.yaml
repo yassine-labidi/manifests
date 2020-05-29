@@ -342,6 +342,41 @@ spec:
         name: manifests
         path: seldon/seldon-core-operator
     name: seldon-core-operator
+  - kustomizeConfig:
+      overlays:
+      - application
+      repoRef:
+        name: manifests
+        path: gcp/cloud-endpoints
+    name: cloud-endpoints
+  - kustomizeConfig:
+      overlays:
+      - managed-cert
+      - application
+      parameters:
+      - name: namespace
+        value: istio-system
+      - name: ipName
+        value: test1-ip
+      - name: hostname
+      repoRef:
+        name: manifests
+        path: gcp/iap-ingress
+    name: iap-ingress
+  plugins:
+  - kind: KfGcpPlugin
+    metadata:
+      creationTimestamp: null
+      name: gcp
+    spec:
+      createPipelinePersistentStorage: true
+      deploymentManagerConfig:
+        repoRef:
+          name: manifests
+          path: gcp/deployment_manager_configs
+      enableWorkloadIdentity: true
+      skipInitProject: true
+      useBasicAuth: false
   repos:
   - name: manifests
     uri: https://github.com/kubeflow/manifests/archive/master.tar.gz
