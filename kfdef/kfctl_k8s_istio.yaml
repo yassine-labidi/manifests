@@ -363,20 +363,6 @@ spec:
         name: manifests
         path: gcp/iap-ingress
     name: iap-ingress
-  plugins:
-  - kind: KfGcpPlugin
-    metadata:
-      creationTimestamp: null
-      name: gcp
-    spec:
-      createPipelinePersistentStorage: true
-      deploymentManagerConfig:
-        repoRef:
-          name: manifests
-          path: gcp/deployment_manager_configs
-      enableWorkloadIdentity: true
-      skipInitProject: true
-      useBasicAuth: false
   repos:
   - name: manifests
     uri: https://github.com/kubeflow/manifests/archive/master.tar.gz
